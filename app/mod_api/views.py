@@ -13,7 +13,7 @@ mod_api = Blueprint('api', __name__, url_prefix='/api')
 def get_campaigns_by_age(user_id):
     campaigns = []
     # set radius
-    dist = 7
+    dist = 500
     user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
     user_lat = user['location'][0]
     user_lng = user['location'][1]

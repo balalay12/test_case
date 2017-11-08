@@ -1,16 +1,23 @@
 # Test case
 
+## Used technologies
+Flask
+MongoDB
+Bootstrap
+
 ## Build setup
 
 ```
 #install mongodb and run
-# then set geo indexes
+# then create geo indexes
 db.users.createIndex( { location : "2dsphere" } )
 db.campaigns.createIndex( { location : "2dsphere" } )
 db.events.createIndex( { location : "2dsphere" } )
 
 # install python dependecies
 pip install -r requirements.txt
+
+# set distance in mod_api/views for searching radius #crutch
 
 # run dev server at localhost:8080
 python run.py
@@ -20,8 +27,8 @@ python run.py
 ### URLs
 * /admin
     * /events - show events with links to webview
-    * /campaigns - show campaging
-    * /users - show users with linkg to /api/<user_id>
+    * /campaigns - show campaigns
+    * /users - show users with link to /api/<user_id>
     * /event/add - create event form
     * /campaign/add - create campaign form
 * /api/<user_id> - here you come from /admin/users for get campaigns for user by geolocation
