@@ -14,6 +14,8 @@ db.users.createIndex( { location : "2dsphere" } )
 db.campaigns.createIndex( { location : "2dsphere" } )
 db.events.createIndex( { location : "2dsphere" } )
 
+# set db name, host, port etc in config.py
+
 # install python dependecies
 pip install -r requirements.txt
 

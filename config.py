@@ -6,10 +6,9 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-
 # MongoDB settings
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
-MONGO_DBNAME = 'testCase'
+MONGO_DBNAME = 'app'
 
 UPLOAD_FOLDER = '/static/img/'

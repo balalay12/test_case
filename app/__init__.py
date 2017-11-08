@@ -3,9 +3,10 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-mongo = PyMongo(app)
 
 app.config.from_object('config')
+
+mongo = PyMongo(app)
 
 from app.mod_admin.views import mod_admin as admin_module
 from app.mod_api.views import mod_api as api_module

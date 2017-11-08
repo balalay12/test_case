@@ -54,11 +54,7 @@
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3">
-                    {% if form.description.data %}
-                        {{ form.description.data }}
-                    {% endif %}">
-                </textarea>
+                <textarea class="form-control" id="description" name="description" rows="3">{% if form.description.data %}{{ form.description.data }}{% endif %}</textarea>
                 {% for errors in form.description.errors %}
                     <small class="form-text  text-danger">
                         {{ errors }}
