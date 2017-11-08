@@ -1,0 +1,28 @@
+{% extends 'base.jinja2' %}
+
+{% block content %}
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/users">Show users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/events">Show events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/campaigns">Show campaigns</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/event/add">Create event</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/campaign/add">Create campaign</a>
+        </li>
+    </ul>
+
+    <div class="row">
+
+        {% block admincontent %}
+        {% endblock %}
+
+    </div>
+{% endblock %}

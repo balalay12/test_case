@@ -1,0 +1,174 @@
+{% extends 'admin/index.jinja2' %}
+
+{% block admincontent %}
+    <!-- Creating event form -->
+    <div class="col-sm">
+        <h3>Create event</h3>
+        <form method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter name"
+                       value="{% if form.name.data %} {{ form.name.data }} {% endif %}">
+                {% for errors in form.name.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="organizator">Organizator</label>
+                <input type="text" id="organizator" name="organizator" class="form-control"
+                       placeholder="Enter organizator"
+                       value="{% if form.organizator.data %} {{ form.organizator.data }} {% endif %}">
+                {% for errors in form.organizator.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="logo">Logo</label>
+                <input type="file" id="logo" name="logo" class="form-control-file">
+                {% for errors in form.logo.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="icon">Icon</label>
+                <select class="form-control" name="icon" id="icon">
+                    <option value="drop.png">Drop</option>
+                    <option value="pine-tree.png">Pine-tree</option>
+                </select>
+                {% for errors in form.icon.errors %}
+                    <small class="form-text  ext-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3">
+                    {% if form.description.data %}
+                        {{ form.description.data }}
+                    {% endif %}">
+                </textarea>
+                {% for errors in form.description.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="what">What?</label>
+                <input type="text" id="what" name="what" class="form-control" placeholder="Enter description"
+                       value="{% if form.what.data %} {{ form.what.data }} {% endif %}">
+                {% for errors in form.what.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="where">Where?</label>
+                <input type="text" id="where" name="where" class="form-control" placeholder="Enter description"
+                       value="{% if form.where.data %} {{ form.where.data }} {% endif %}">
+                {% for errors in form.where.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="when">When?</label>
+                <input type="text" id="when" name="when" class="form-control" placeholder="Enter description"
+                       value="{% if form.when.data %} {{ form.when.data }} {% endif %}">
+                {% for errors in form.when.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div id="map" style="height: 400px"></div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="lat">Lat</label>
+                        <input type="text" id="lat" name="lat" class="form-control" readonly
+                               value="{% if form.lat.data %} {{ form.lat.data }} {% endif %}">
+                        {% for errors in form.lat.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="lng">Lng</label>
+                        <input type="text" id="lng" name="lng" class="form-control" readonly
+                               value="{% if form.lng.data %} {{ form.lng.data }} {% endif %}">
+                        {% for errors in form.lng.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="number">Number</label>
+                <input type="text" id="number" name="number" class="form-control" placeholder="Enter number"
+                       value="{% if form.number.data %} {{ form.number.data }} {% endif %}">
+                {% for errors in form.number.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="url">Web site</label>
+                <input type="text" id="url" name="url" class="form-control" placeholder="Enter web"
+                       value="{% if form.url.data %} {{ form.url.data }} {% endif %}">
+                {% for errors in form.url.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+            <button class="btn btn-primary" type="submit">Submit form</button>
+        </form>
+    </div>
+
+    <script>
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 10
+            });
+
+            map.addListener('click', function (e) {
+                $('#lat').val(e.latLng.lat());
+                $('#lng').val(e.latLng.lng());
+            })
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEMD05M9S_CyaztSy1jrVC-sHQ2EARVLU&callback=initMap"
+            async defer></script>
+{% endblock %}
+

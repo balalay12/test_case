@@ -1,0 +1,29 @@
+{% extends 'admin/index.jinja2' %}
+
+{% block admincontent %}
+    <div class="col-sm">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Event</th>
+                <th scope="col">Target</th>
+                <th scope="col">Date</th>
+                <th scope="col">Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for camp in campaigns %}
+                <tr>
+                    <td>{{ camp.name }}</td>
+                    <td>{{ camp.event.name }}</td>
+                    <td>{{ camp.target.from }} - {{ camp.target.to }}, {{ camp.target.sex }}, {{ camp.target.radius }}</td>
+                    <td>{{ camp.date }}</td>
+                    <td>{{ camp.location[0] }}, {{ camp.location[1] }}</td>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{name: "Danil", age: 25, sex: "male", location: [57.005220, 61.458087]}

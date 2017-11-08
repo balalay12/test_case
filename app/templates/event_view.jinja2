@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="media">
+                <img class="mr-3" style="width: 60px; height: 60px;"
+                     src="{{ url_for('static', filename="img/"+event.logo) }}" alt="logo">
+                <div class="media-body">
+                    <h5>{{ event.name }}</h5>
+                    {{ event.organizator }}
+                    <img class="float-right" style="width: 25px; height: 25px;"
+                         src="{{ url_for('static', filename="icons/"+event.icon) }}" alt="logo">
+                </div>
+            </div>
+            <p>{{ event.description }}</p>
+            <h6>Activity details:</h6>
+            <p><strong>What: </strong>{{ event.what }}</p>
+            <p><strong>When: </strong>{{ event.when }}</p>
+            <p><strong>Where: </strong>{{ event.where }}</p>
+            <div id="map" style="height: 120%"></div>
+            <div class="text-center" style="margin-top: 10px;">
+                <button type="button" class="btn btn-warning" style="width: 40%;">CALL</button>
+                <button type="button" class="btn btn-warning" style="width: 40%;">WEBSITE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+<script>
+    var map;
+    var lat = {{ event.location[0] }};
+    var lng = {{ event.location[1] }};
+    var coords = {lat: lat, lng: lng};
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center:coords,
+            zoom: 10
+        });
+
+        var marker = new google.maps.Marker({
+            position: coords,
+            map: map
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEMD05M9S_CyaztSy1jrVC-sHQ2EARVLU&callback=initMap"
+        async defer></script>
+</body>
+</html>

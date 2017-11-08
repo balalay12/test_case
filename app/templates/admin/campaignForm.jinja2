@@ -1,0 +1,154 @@
+{% extends 'admin/index.jinja2' %}
+
+{% block admincontent %}
+    <div class="col-sm">
+        <h3>Create campaign</h3>
+        <form method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter name"
+                       value="{% if form.name.data %} {{ form.name.data }} {% endif %}">
+                {% for errors in form.name.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="event">Event</label>
+                <select class="form-control" name="event" id="event">
+                    {% for event in events %}
+                        <option value="{{ event._id }}">{{ event.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <h5>Target group</h5>
+            <div class="row">
+                <div class="col-sm">
+
+                    <div class="form-group">
+                        <label for="target_from">From</label>
+                        <input type="number" id="target_from" name="target_from" class="form-control"
+                               placeholder="Enter start age"
+                               value="{% if form.target_from.data %} {{ form.target_from.data }} {% endif %}">
+                        {% for errors in form.target_from.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="col-sm">
+
+                    <div class="form-group">
+                        <label for="target_to">To</label>
+                        <input type="number" id="target_to" name="target_to" class="form-control"
+                               placeholder="Enter end age"
+                               value="{% if form.target_to.data %} {{ form.target_to.data }} {% endif %}">
+                        {% for errors in form.target_to.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="col-sm">
+
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select class="form-control" name="sex" id="sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-sm">
+
+                    <div class="form-group">
+                        <label for="radius">To</label>
+                        <input type="number" id="radius" name="radius" class="form-control"
+                               placeholder="Enter raidus"
+                               value="{% if form.radius.data %} {{ form.radius.data }} {% endif %}">
+                        {% for errors in form.radius.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date" class="form-control" placeholder="Enter date">
+                {% for errors in form.date.errors %}
+                    <small class="form-text  text-danger">
+                        {{ errors }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div id="map" style="height: 400px"></div>
+
+            <h5>Coords</h5>
+            <div class="row">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label for="lat">Lat</label>
+                        <input type="text" id="lat" name="lat" class="form-control" readonly
+                               value="{% if form.lat.data %} {{ form.lat.data }} {% endif %}">
+                        {% for errors in form.lat.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="col">
+
+                    <div class="form-group">
+                        <label for="lng">Lng</label>
+                        <input type="text" id="lng" name="lng" class="form-control" readonly
+                               value="{% if form.lng.data %} {{ form.lng.data }} {% endif %}">
+                        {% for errors in form.lng.errors %}
+                            <small class="form-text  text-danger">
+                                {{ errors }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit form</button>
+        </form>
+    </div>
+
+    <script>
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 10
+            });
+
+            map.addListener('click', function (e) {
+                $('#lat').val(e.latLng.lat());
+                $('#lng').val(e.latLng.lng());
+            })
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEMD05M9S_CyaztSy1jrVC-sHQ2EARVLU&callback=initMap"
+            async defer></script>
+{% endblock %}
+

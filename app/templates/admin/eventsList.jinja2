@@ -1,0 +1,36 @@
+{% extends 'admin/index.jinja2' %}
+
+{% block admincontent %}
+    <div class="col-sm">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Organizator</th>
+                <th scope="col">Description</th>
+                <th scope="col">What</th>
+                <th scope="col">Where</th>
+                <th scope="col">When</th>
+                <th scope="col">Location</th>
+                <th scope="col">number</th>
+                <th scope="col">url</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td><a href="/event/{{ event._id }}">{{ event.name }}</a></td>
+                    <td>{{ event.organizator }}</td>
+                    <td>{{ event.description }}</td>
+                    <td>{{ event.what }}</td>
+                    <td>{{ event.where }}</td>
+                    <td>{{ event.when }}</td>
+                    <td>{{ event.location.lat }}, {{ event.location.lng }}</td>
+                    <td>{{ event.number }}</td>
+                    <td>{{ event.url }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'admin/index.jinja2' %}
+
+{% block admincontent %}
+    <div class="col-sm">
+        <h3>Test API</h3>
+        <p>Click user for get campaign for user by age</p>
+        {% for user in users %}
+            <a href="/api/{{ user._id }}">{{ user.name }} {{ user.age }} {{ user.sex }}</a><br>
+        {% endfor %}
+    </div>
+{% endblock %}
