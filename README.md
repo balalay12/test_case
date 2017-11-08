@@ -1,9 +1,9 @@
 # Test case
 
 ## Used technologies
-Flask
-MongoDB
-Bootstrap
+* Flask
+* MongoDB
+* Bootstrap
 
 ## Build setup
 
@@ -14,7 +14,7 @@ db.users.createIndex( { location : "2dsphere" } )
 db.campaigns.createIndex( { location : "2dsphere" } )
 db.events.createIndex( { location : "2dsphere" } )
 
-# set db name, host, port etc in config.py
+# set db name, host, port etc in config.py (in meters)
 
 # install python dependecies
 pip install -r requirements.txt
